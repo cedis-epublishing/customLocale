@@ -13,6 +13,7 @@ import('lib.pkp.classes.controllers.grid.GridHandler');
 import('plugins.generic.customLocale.controllers.grid.CustomLocaleGridCellProvider');
 import('classes.handler.Handler');
 import('plugins.generic.customLocale.classes.CustomLocale');
+import('lib.pkp.classes.controllers.grid.plugins.PluginGridHandler');
 
 require_once('CustomLocaleAction.inc.php');
 
@@ -112,14 +113,6 @@ class CustomLocaleGridHandler extends GridHandler {
 					$value = substr($value, 0, -1); 
 				}			
 				if (!empty($value)) {
-					
-				
-$myfile = 'test.txt';
-$newContentCF5344 = print_r("'" . $value . "'" . $key, true);
-$contentCF2343 = file_get_contents($myfile);
-$contentCF2343 .= "\n value: " . $newContentCF5344 ;
-file_put_contents($myfile, $contentCF2343 );					
-					
 					if (!$file->update($key, $value)) {
 						$file->insert($key, $value);
 					}
@@ -262,7 +255,7 @@ file_put_contents($myfile, $contentCF2343 );
 	/**
 	 * @copydoc GridHandler::renderFilter()
 	 */
-	function renderFilter($request) {
+	function renderFilter($request, $filterData = array()) {
 		$context = $request->getContext();
 		$locales = $context->getSupportedLocaleNames();
 
