@@ -33,11 +33,13 @@ class CustomLocalePlugin extends GenericPlugin {
 					$contextId = $context ? $context->getId() : CONTEXT_SITE;
 				}
 
-				$pathName = "customLocale";
+				$pathName = "";
 				$versionDao = DAORegistry::getDAO('VersionDAO');
 				if ($versionDao->getCurrentVersion()->getProduct()=="ojs2") {
 					$pathName = "journals";
-				}				
+				} else {
+					$pathName="presses";
+				}
 				$publicFilesDir = Config::getVar('files', 'public_files_dir');
 				$customLocalePathBase = "$publicFilesDir/$pathName/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/";
 
@@ -151,14 +153,14 @@ class CustomLocalePlugin extends GenericPlugin {
 					$contextId = $context ? $context->getId() : CONTEXT_SITE;
 				}
 
-/*
-$myfile = 'test.txt';
-$newContentCF5344 = print_r($product, true);
-$contentCF2343 = file_get_contents($myfile);
-$contentCF2343 .= "\n productType: " . $newContentCF5344 ;
-file_put_contents($myfile, $contentCF2343 ); 
-	*/
-				
+				$pathName = "";
+				$versionDao = DAORegistry::getDAO('VersionDAO');
+				if ($versionDao->getCurrentVersion()->getProduct()=="ojs2") {
+					$pathName = "journals";
+				} else {
+					$pathName="presses";
+				}
+
 		$publicFilesDir = Config::getVar('files', 'public_files_dir');		
 		$customLocalePath = "$publicFilesDir/$pathName/$contextId/" . CUSTOM_LOCALE_DIR . "/$locale/$localeFilename";
 
